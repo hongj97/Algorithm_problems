@@ -1,18 +1,21 @@
-def prime_list(n):
-    n=n+1
-    sieve=[True]*n
-    m=int(n**0.5)
-    for i in range(2,m+1):
-        if sieve[i]:
-            for j in range (i+i,n,i):
-                sieve[j]=False
-    return[i for i in range(2,n) if sieve[i]==True]           
+# 소수 찾기
 
- 
-N=int(input())
-list=[int(i) for i in input().split()]  
-maxnumber=max(list)
-primelist_of_max = prime_list(maxnumber)
-count=len(set(list) & set(primelist_of_max))
+n = int(input())
+num_list = list(map(int, input().split()))
 
-print(count)
+#소수 확인
+cnt = 0
+for num in num_list:
+    prime_chk = 0
+    end_num = int(num**0.5)+1 #num이 홀수
+    if int(num**0.5) % 2==0: #num이 짝수
+        end_num=int(num**0.5)+1
+    if num != 1:
+        for i in range(2, end_num):
+            if num % i == 0: #소수가 아닌 경우
+                break
+            else: #소수인 경우
+                prime_chk +=1
+        if prime_chk == (end_num-2):
+            cnt +=1
+print(cnt)
